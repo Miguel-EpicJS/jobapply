@@ -1,0 +1,14 @@
+.git
+.gitignore
+.pytest_cache
+__pycache__
+*.py[cod]
+generated-resumes
+profile.json
+Profile-*.tex
+*.pdf
+*.aux
+*.log
+*.out
+curriculum
+searxng/settings.yml

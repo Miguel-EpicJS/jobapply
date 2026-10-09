@@ -26,6 +26,45 @@ The first two commands create your private local profile and resume template.
 They are not tracked by Git. The generated PDFs and job descriptions are also
 kept locally.
 
+## Docker
+
+Build the image from the repository root:
+
+```bash
+docker build -t jobapply:local .
+```
+
+Prepare the private configuration on the host if you have not already:
+
+```bash
+mkdir -p ~/.jobapply
+cp profile.example.json ~/.jobapply/profile.json
+cp resume-template.example.tex ~/.jobapply/resume-template.tex
+```
+
+Run the interactive TUI with your profile, database, and generated PDFs mounted
+outside the container:
+
+```bash
+docker run --rm -it \
+  -e HOME=/data \
+  -v "$HOME/.jobapply:/data/.jobapply" \
+  -v "$PWD/generated-resumes:/data/generated-resumes" \
+  jobapply:local tui
+```
+
+The equivalent Compose workflow is:
+
+```bash
+docker compose -f docker-compose.jobapply.yml build
+docker compose -f docker-compose.jobapply.yml run --rm jobapply
+```
+
+The image includes Python, `pdflatex`, `pdftotext`, and `xclip`. Clipboard
+access from inside a container depends on the host desktop's X11 permissions;
+if `p` cannot access the clipboard, paste the description into a host-side
+workflow or run the TUI directly on the host.
+
 ## Add your information
 
 Edit `~/.jobapply/profile.json` and replace the example values:

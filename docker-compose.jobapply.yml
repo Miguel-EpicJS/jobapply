@@ -1,0 +1,12 @@
+services:
+  jobapply:
+    build: .
+    stdin_open: true
+    tty: true
+    environment:
+      HOME: /data
+      JOBAPPLY_DB: /data/.jobapply/jobs.db
+    volumes:
+      - ${JOBAPPLY_HOME:-$HOME/.jobapply}:/data/.jobapply
+      - ${JOBAPPLY_OUTPUT:-./generated-resumes}:/data/generated-resumes
+    command: tui
