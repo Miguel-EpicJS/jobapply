@@ -14,6 +14,11 @@ PROVIDER_DEFAULTS = {
 
 
 def _prompt(job: dict, profile: dict) -> str:
+    def value(key: str) -> str:
+        if isinstance(job, dict):
+            return str(job.get(key, "") or "")
+        return str(getattr(job, key, "") or "")
+
     evidence = {
         "summary": profile.get("summary", ""),
         "experience": profile.get("experience", []),
@@ -23,8 +28,8 @@ def _prompt(job: dict, profile: dict) -> str:
     return f"""Tailor a resume using only the candidate evidence below. Never invent employers, dates, metrics, technologies, titles, or experience. Rank existing bullets and skills for the job. Return JSON only with keys summary, experience, skills. Keep every experience bullet verbatim from the evidence.
 
 JOB:
-{job.get('title', '')} at {job.get('company', '')}
-{job.get('description', '')}
+{value('title')} at {value('company')}
+{value('description')}
 
 CANDIDATE EVIDENCE:
 {json.dumps(evidence, ensure_ascii=False)}
