@@ -1,0 +1,31 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[letterpaper,margin=0.65in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{label={-},leftmargin=1.25em,itemsep=1pt,topsep=2pt}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\newcommand{\job}[4]{\textbf{#1} \hfill \textbf{#2}\\\textit{#3} \hfill #4\par}
+\begin{document}
+\begin{center}
+  {\LARGE\bfseries Your Name}\\[3pt]
+  {\large Software Engineer | Python | TypeScript}\\[4pt]
+  you@example.com \textbar{} linkedin.com/in/your-profile
+\end{center}
+\section{Professional Summary}
+% JOBAPPLY:SUMMARY:START
+Your summary will be generated from profile.json.
+% JOBAPPLY:SUMMARY:END
+\section{Technical Skills}
+% JOBAPPLY:SKILLS:START
+Your skills will be generated from profile.json.
+% JOBAPPLY:SKILLS:END
+\section{Professional Experience}
+% JOBAPPLY:EXPERIENCE:START
+Your experience will be generated from profile.json.
+% JOBAPPLY:EXPERIENCE:END
+\end{document}

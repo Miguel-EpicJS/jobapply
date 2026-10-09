@@ -1,0 +1,26 @@
+{
+  "name": "Your Name",
+  "email": "you@example.com",
+  "linkedin": "https://www.linkedin.com/in/your-profile",
+  "github": "https://github.com/your-handle",
+  "headline": "Software Engineer | Python | TypeScript | Cloud",
+  "summary": "Software engineer experienced in building reliable products, APIs, data workflows, and customer-facing systems.",
+  "experience": [
+    {
+      "company": "Example Company",
+      "dates": "2022 -- Present",
+      "role": "Software Engineer",
+      "bullets": [
+        "Built and operated customer-facing software with measurable improvements in reliability and delivery speed.",
+        "Designed APIs, background workflows, automated tests, and observability for production systems."
+      ],
+      "technologies": "Python, TypeScript, PostgreSQL, Docker, AWS"
+    }
+  ],
+  "skills": [
+    ["Programming", "Python, TypeScript, JavaScript, SQL"],
+    ["Data and Storage", "PostgreSQL, MySQL, Redis"],
+    ["Cloud and DevOps", "AWS, Docker, CI/CD, observability"],
+    ["Quality and Practices", "Automated testing, security, agile delivery"]
+  ]
+}

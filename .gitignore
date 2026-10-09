@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.aux
+*.log
+*.out
+*.pdf
+generated-resumes/
+Profile-*.tex
+profile.json
+curriculum/
+searxng/settings.yml
