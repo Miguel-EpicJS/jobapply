@@ -15,6 +15,92 @@ full terms.
 ## Quick start
 
 ```bash
+cd /path/to/job_apply
+cp profile.example.json ~/.jobapply/profile.json
+cp resume-template.example.tex ~/.jobapply/resume-template.tex
+python3 -m pip install -e .
+python3 -m jobapply tui
+```
+
+The first two commands create your private local profile and resume template.
+They are not tracked by Git. The generated PDFs and job descriptions are also
+kept locally.
+
+## Add your information
+
+Edit `~/.jobapply/profile.json` and replace the example values:
+
+```json
+{
+  "name": "Your Name",
+  "email": "you@example.com",
+  "linkedin": "https://www.linkedin.com/in/you",
+  "github": "https://github.com/you",
+  "headline": "Your professional headline",
+  "summary": "A truthful summary of your experience.",
+  "experience": [
+    {
+      "company": "Company",
+      "dates": "2022 -- Present",
+      "role": "Software Engineer",
+      "bullets": ["A measurable accomplishment using technologies you actually used."],
+      "technologies": "Python, PostgreSQL, Docker"
+    }
+  ],
+  "skills": [["Programming", "Python, TypeScript, SQL"]]
+}
+```
+
+Use only verifiable information. The generator ranks and rewrites your
+existing evidence; it must not be used to invent employers, dates, metrics, or
+skills.
+
+To use an existing personal LaTeX resume instead, keep it outside the public
+repository and configure its path in the TUI with `c`. It must contain these
+markers:
+
+```text
+% JOBAPPLY:SUMMARY:START ... % JOBAPPLY:SUMMARY:END
+% JOBAPPLY:SKILLS:START ... % JOBAPPLY:SKILLS:END
+% JOBAPPLY:EXPERIENCE:START ... % JOBAPPLY:EXPERIENCE:END
+```
+
+## Generate From A Pasted Job
+
+1. Copy the complete job description to your system clipboard.
+2. Start the TUI with `python3 -m jobapply tui`.
+3. Press `p` for **paste**.
+4. Confirm the job title, company, location, and optional URL.
+5. Select the new job and press `g` to generate the tailored resume.
+6. Review the generated `.tex`, `.pdf`, and `application-answers.txt` files.
+
+The PDF is written to `generated-resumes/<job-id>-<role>/` by default. The
+description is stored in the local SQLite database at `~/.jobapply/jobs.db`.
+Pasting requires `xclip`; install it with your operating system package
+manager if the TUI reports that the clipboard is unavailable.
+
+Press `c` before generating to configure:
+
+- `Resume LaTeX template`: your private template path
+- `Profile JSON`: your private profile path
+- `GitHub username`: optional public repositories used as additional evidence
+- `AI provider`: `none`, `openai`, `deepseek`, `openrouter`, `ollama`, `codex`, or `opencode`
+
+With `none`, tailoring uses deterministic local matching. With an AI provider,
+the job description, profile, and public GitHub metadata are sent to that
+provider for ranking and wording. The result is still written locally for
+review and falls back to local matching if the provider is unavailable.
+
+For example, to use DeepSeek:
+
+```bash
+export DEEPSEEK_API_KEY=your-key
+python3 -m jobapply tui
+```
+
+Then press `c`, set the provider to `deepseek`, and optionally set a model.
+
+```bash
 python3 -m jobapply search 'site:ashbyhq.com "AI Engineer" remote'
 python3 -m jobapply jobs
 python3 -m jobapply show 1
