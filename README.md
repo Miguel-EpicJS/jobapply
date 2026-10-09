@@ -4,6 +4,14 @@ A local-first TUI for collecting job descriptions and generating evidence-based,
 
 The application never submits applications. Scraped descriptions, pasted descriptions, profile data, generated LaTeX, and PDFs stay local by default.
 
+## License
+
+JobApply is available under the **JobApply Personal Use License**. Personal,
+educational, research, and internal non-commercial use are allowed. Offering
+JobApply or a modified version as a hosted SaaS, API, paid product, or other
+commercial service requires prior written permission. See `LICENSE` for the
+full terms.
+
 ## Quick start
 
 ```bash
