@@ -26,6 +26,13 @@ The first two commands create your private local profile and resume template.
 They are not tracked by Git. The generated PDFs and job descriptions are also
 kept locally.
 
+Example output generated from the included example profile and template:
+
+![Example generated resume preview](docs/example-resume-preview.png)
+
+The preview is intentionally generic. Your generated resume uses the private
+profile and template configured on your machine.
+
 ## Docker
 
 Build the image from the repository root:
