@@ -123,10 +123,18 @@ def _job_words(description: str) -> set[str]:
     return set(re.findall(r"[a-z0-9+#.-]{3,}", clean_html(description).lower()))
 
 
+def _experience_date(entry: dict) -> tuple[int, int]:
+    months = {name: index for index, name in enumerate(("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"), 1)}
+    dates = str(entry.get("dates", "")).lower()
+    year = re.search(r"\b(19|20)\d{2}\b", dates)
+    month = next((number for name, number in months.items() if name in dates), 0)
+    return (int(year.group(0)) if year else 0, month)
+
+
 def _tailored_experience(description: str, profile: dict) -> str:
     words = _job_words(description)
     blocks = []
-    for entry in profile["experience"]:
+    for entry in sorted(profile["experience"], key=_experience_date, reverse=True):
         bullets = sorted(entry.get("bullets", []), key=lambda bullet: -len(set(re.findall(r"[a-z0-9+#.-]{3,}", bullet.lower())) & words))
         blocks.extend([rf"\job{{{_latex(entry['company'])}}}{{{_latex(entry.get('dates', ''))}}}{{{_latex(entry.get('role', ''))}}}{{}}", r"\begin{itemize}", *[rf"  \item {_latex(bullet)}" for bullet in bullets[:6]], r"\end{itemize}", rf"\textbf{{Technologies:}} {_latex(entry.get('technologies', ''))}", r""])
     return "\n".join(blocks).rstrip()

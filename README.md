@@ -79,6 +79,21 @@ description is stored in the local SQLite database at `~/.jobapply/jobs.db`.
 Pasting requires `xclip`; install it with your operating system package
 manager if the TUI reports that the clipboard is unavailable.
 
+### Commure example
+
+For a pasted Commure role such as **Software Engineer, Autonomous Revenue
+Operations (Brazil)**, copy the job description, press `p`, enter `Commure` and
+the role details, then select it and press `g`. With the private profile and
+template used during development, the generated PDF was written to:
+
+```text
+generated-resumes/commure-autonomous-revenue-operations-brazil-software-engineer-autonomous-revenue-operations/tailored-resume.pdf
+```
+
+Professional experience is always rendered newest-first based on the start
+month and year in each profile entry, regardless of the order returned by an AI
+provider.
+
 Press `c` before generating to configure:
 
 - `Resume LaTeX template`: your private template path

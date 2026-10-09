@@ -28,3 +28,16 @@ class GenerationTests(unittest.TestCase):
         self.assertIn("Example Company", rendered)
         self.assertNotIn("old summary", rendered)
         self.assertNotIn("old experience", rendered)
+
+    def test_experience_is_newest_first(self):
+        template = "% JOBAPPLY:SUMMARY:START\nold\n% JOBAPPLY:SUMMARY:END\n% JOBAPPLY:SKILLS:START\nold\n% JOBAPPLY:SKILLS:END\n% JOBAPPLY:EXPERIENCE:START\nold\n% JOBAPPLY:EXPERIENCE:END"
+        profile = {
+            "summary": "Engineer",
+            "experience": [
+                {"company": "Older", "dates": "January 2020 -- December 2021", "role": "Engineer", "bullets": ["Older work"], "technologies": "Python"},
+                {"company": "Newest", "dates": "August 2024 -- Present", "role": "Engineer", "bullets": ["Newest work"], "technologies": "Python"},
+            ],
+            "skills": [["Programming", "Python"]],
+        }
+        rendered = render_resume(template, type("Job", (), {"title": "Engineer", "description": "Python"})(), profile)
+        self.assertLess(rendered.index("Newest"), rendered.index("Older"))
